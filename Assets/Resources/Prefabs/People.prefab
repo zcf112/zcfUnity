@@ -143,7 +143,7 @@ MonoBehaviour:
   happy3: 0
   happy4: 0
   isInfected: 0
-  std: {fileID: 6187747821584144700}
+  peo: {fileID: 6187747821584144700}
 --- !u!195 &6187747821584144699
 NavMeshAgent:
   m_ObjectHideFlags: 0

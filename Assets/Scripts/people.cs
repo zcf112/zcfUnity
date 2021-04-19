@@ -6,14 +6,13 @@ using UnityEngine.AI;
 
 public class people : MonoBehaviour
 {
-    public GameObject home, company;
-    public GameObject Dest1,Dest2,Dest3;//寻路到目标物体
-    public float time1, time2, rate1, rate2, rate3,value, happy1, happy2, happy3, happy4;
+    public GameObject home, company,Dest1,Dest2,Dest3;//寻路到目标物体
+    public float time1, time2, rate1, rate2, rate3,value, happy1, happy2, happy3, happy4;//时间，概率，工作价值，幸福度
 
     private NavMeshAgent agent;//导航
     public System.Random rd = new System.Random();
     public int isInfected=0;
-    public GameObject std;
+    public GameObject peo;
 
     // 寻路
     void Start(){
@@ -22,20 +21,12 @@ public class people : MonoBehaviour
 
         if (isInfected==1)
         {
-            std.GetComponent<Renderer>().material.color = Color.red;
+            peo.GetComponent<Renderer>().material.color = Color.red;
             Text txt=GameObject.Find("Canvas/numInfected").GetComponent<Text>();
             txt.text=(Int32.Parse(txt.text)+1)+"";
         }
 
         StartCoroutine(Timer());
-    }
-
-    void Update()
-    {
-        /*
-        Random ran=new Random();
-        int RandKey=ran.Next(100,999);
-        */
     }
 
     void OnTriggerStay(Collider coll)//
@@ -48,30 +39,32 @@ public class people : MonoBehaviour
             if(Time.time%24==time1){
                 agent.SetDestination(company.transform.position);
             }
-        }
-
-        if(string.Equals(coll.gameObject.name,"HTrigger")){
             //Debug.Log("Get to Home"); 
             if(Time.time%24==time2){
                 agent.SetDestination(home.transform.position);
             }
-            if (ran.Next(0, 100000)<rate1)
+
+            if ((Time.time % 24 < time1) ||(Time.time % 24 > time2))//上班时间外可以出去玩？晚班呢？
             {
-                agent.SetDestination(Dest1.transform.position);
+                if (ran.Next(0, 100000)<rate1)
+                {
+                    agent.SetDestination(Dest1.transform.position);
+                }
+                if (ran.Next(0, 100000) < rate2)
+                {
+                    agent.SetDestination(Dest2.transform.position);
+                }
+                if (ran.Next(0, 100000) < rate3)
+                {
+                    agent.SetDestination(Dest3.transform.position);
+                }
             }
-            if (ran.Next(0, 100000) < rate2)
-            {
-                agent.SetDestination(Dest2.transform.position);
-            }
-            if (ran.Next(0, 100000) < rate3)
-            {
-                agent.SetDestination(Dest3.transform.position);
-            }
+            
         }
 
         if (string.Equals(coll.gameObject.tag, "peopletag")&& coll.gameObject.GetComponent<Renderer>().material.color != Color.red)
         {
-            if (std.GetComponent<Renderer>().material.color==Color.red)
+            if (peo.GetComponent<Renderer>().material.color==Color.red)
             {
                 if (rd.Next(0,3000) == 1)
                 {

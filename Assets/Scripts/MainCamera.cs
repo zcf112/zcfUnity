@@ -1,15 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using UnityEngine;
 using UnityEngine.AI;
-/*
-    //生成房子（子对象）
-*/
+//生成房子（子对象）
 
 public class MainCamera : MonoBehaviour
 {
     public NavMeshSurface navMeshSurface;//导航烘焙
     public MysqlManager mysqlManager = new MysqlManager();
-    //public MysqlManager mysqlManager2 = new MysqlManager();
 
     void Start()
     {
@@ -56,7 +53,8 @@ public class MainCamera : MonoBehaviour
         navMeshSurface.BuildNavMesh();//每次添加后，重新烘焙
         reader.Close();
     }
-        void Update()
+
+        void Update()//已经用不到的按键添加对象
     {
         //isShow = GameObject.Find("Homes/Home").GetComponent<Transform>();//查找并获取子物体
         //isShow.Translate(Vector3.forward,Space.World);//测试 移动

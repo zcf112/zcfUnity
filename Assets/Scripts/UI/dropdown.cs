@@ -21,23 +21,22 @@ public class dropdown : MonoBehaviour
         MySqlDataReader reader=mysqlManager.SelectFrom("select id,name from People");
         List<string> DropOptions=new List<string>();
         
-        while (reader.Read())
+        while (reader.Read())//将数据库读取到的每一条加到下拉框里
         {
             int count = reader.FieldCount;
             for (int i = 0; i < count; i++)
             {
                 string key = reader.GetValue(i)+" "+ reader.GetValue(++i);
-                //Debug.Log(key);
                 DropOptions.Add(key);
             }    
         }
         dDown.AddOptions(DropOptions);
-        //添加监听器
+        //添加监听器,下拉表里选项被点击时触发
         dDown.GetComponent<Dropdown>().onValueChanged.AddListener(ConsoleResult);
         reader.Close();
     }
 
-    public void ConsoleResult(int value)
+    public void ConsoleResult(int value)//下拉框中某一选项被点击时，在文本框中加字
     {
         MySqlDataReader reader = mysqlManager.SelectFrom("select id,name,type,home,company,loc1,loc2,loc3 from People");
         Debug.Log(value);

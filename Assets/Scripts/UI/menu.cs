@@ -1,37 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+//一个没用到的脚本，展示多个同层按钮事件单脚本处理
 public class menu : MonoBehaviour
 {
-    public Text id,peo_name,type,home,company,loc1,loc2,loc3;
-    public GameObject menu_object,chart_object;
-
-    Button[] Buttons;
     void Start()
     {
-        Buttons = FindObjectsOfType<Button>();
-        foreach (var item in Buttons)
-        {
-            item.onClick.AddListener(() => OnButtonClicked(item));
-        }
+        Button[] Buttons = FindObjectsOfType<Button>();
+        foreach (var item in Buttons)item.onClick.AddListener(() => OnButtonClicked(item));//这不知道什么意思
     }
     private void OnButtonClicked(Button item)
     {
-        MysqlManager mysqlManager = new MysqlManager();
-        Debug.Log("你按下了：" + item.name);
         switch (item.name)
         {
             case "add":
-                string str = "'" + peo_name.text + "'," + type.text + ",'" + home.text + ",'" + company.text + "'," + loc1.text + ",'" + loc2.text + "'," + loc3.text;
-                mysqlManager.InsertInto("People", "`name`,`type`,`home`,`company`,`loc1`,`loc2`,`loc3`",str);
+                Debug.Log("add");
                 break;
             case "update":
-                str = "set name=" + peo_name.text + " type=" + type.text + " home=" + home.text + " company=" + company.text + " loc1=" + loc1.text + " loc2=" + loc2.text + " loc3=" + loc3.text;
-                mysqlManager.UpdateSet("People", str , int.Parse(id.text));//未测试
-                break;
-            case "delete":
-                mysqlManager.DeleteFrom("People", int.Parse(id.text));
+                Debug.Log("update");
                 break;
         }
-        mysqlManager.Close();
     }
 }

@@ -4,27 +4,19 @@ using UnityEngine.UI;
 using XCharts;
 public class lineChart : MonoBehaviour
 {
-    public GameObject lChart,Txt;//XChart插件里的LineChart
-    public LineChart chart;
+    public GameObject lChart,Txt;//XChart插件里的LineChart对象
+    public LineChart chart;//LineChart组件
     public int i = 1;
     void Start()
     {
         chart = lChart.GetComponent<LineChart>();
-        /*if (chart == null)
-        {
-            Debug.Log("ChartNull");
-            chart = lChart.AddComponent<LineChart>();
-            chart.SetSize(580, 300);//代码动态添加图表需要设置尺寸，或直接操作chart.rectTransform
-            chart.title.show = true;
-            chart.title.text = "Line Simple";
-        }*/
-        chart.AddSerie(SerieType.Line, "感染人数");
+        chart.AddSerie(SerieType.Line, "感染人数");//添加一条折线
     }
-    void Update()
+    void Update()//每100帧(？)添加一次记录点
     {
         if (i % 100 == 0)
         {
-            Text txt = Txt.GetComponent<Text>();
+            Text txt = Txt.GetComponent<Text>();//从显示感染人数的text上获取感染人数
             chart.series.AddData("感染人数", Int32.Parse(txt.text));
             chart.xAxis0.AddData((int)Time.time + "");
         }
