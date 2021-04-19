@@ -2,17 +2,9 @@
 using UnityEngine.UI;
 public class menu : MonoBehaviour
 {
-    public Text id;
-    public Text peo_name;
-    public Text type;
-    public Text home;
-    public Text company;
-    public Text loc1;
-    public Text loc2;
-    public Text loc3;
+    public Text id,peo_name,type,home,company,loc1,loc2,loc3;
     public GameObject menu_object,chart_object;
 
-    //gg
     Button[] Buttons;
     void Start()
     {
@@ -25,7 +17,6 @@ public class menu : MonoBehaviour
     private void OnButtonClicked(Button item)
     {
         MysqlManager mysqlManager = new MysqlManager();
-        //下拉框显示数据库内容
         Debug.Log("你按下了：" + item.name);
         switch (item.name)
         {

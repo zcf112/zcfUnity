@@ -1,9 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+//下拉框显示数据库内容
 public class dropdown : MonoBehaviour
 {
     public MysqlManager mysqlManager = new MysqlManager();
@@ -42,7 +41,7 @@ public class dropdown : MonoBehaviour
     {
         MySqlDataReader reader = mysqlManager.SelectFrom("select id,name,type,home,company,loc1,loc2,loc3 from People");
         Debug.Log(value);
-        int count = 1;
+        int count = 0;
         while (reader.Read())
         {
             //Debug.Log("count");
