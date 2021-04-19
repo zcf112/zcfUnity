@@ -29,12 +29,6 @@ public class menu : MonoBehaviour
         Debug.Log("你按下了：" + item.name);
         switch (item.name)
         {
-            case "menuOpen":
-                menu_object.SetActive(true);
-                break;
-            case "chartOpen":
-                chart_object.SetActive(true);
-                break;
             case "add":
                 string str = "'" + peo_name.text + "'," + type.text + ",'" + home.text + ",'" + company.text + "'," + loc1.text + ",'" + loc2.text + "'," + loc3.text;
                 mysqlManager.InsertInto("People", "`name`,`type`,`home`,`company`,`loc1`,`loc2`,`loc3`",str);
