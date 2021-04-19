@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 public class menu : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class menu : MonoBehaviour
     public Text loc1;
     public Text loc2;
     public Text loc3;
-    public GameObject gamObject;
+    public GameObject menu_object,chart_object;
 
     //gg
     Button[] Buttons;
@@ -30,11 +29,11 @@ public class menu : MonoBehaviour
         Debug.Log("你按下了：" + item.name);
         switch (item.name)
         {
-            case "menu":
-                gamObject.SetActive(true);
+            case "menuOpen":
+                menu_object.SetActive(true);
                 break;
-            case "menuclose":
-                gamObject.SetActive(false);
+            case "chartOpen":
+                chart_object.SetActive(true);
                 break;
             case "add":
                 string str = "'" + peo_name.text + "'," + type.text + ",'" + home.text + ",'" + company.text + "'," + loc1.text + ",'" + loc2.text + "'," + loc3.text;
@@ -48,5 +47,6 @@ public class menu : MonoBehaviour
                 mysqlManager.DeleteFrom("People", int.Parse(id.text));
                 break;
         }
+        mysqlManager.Close();
     }
 }
