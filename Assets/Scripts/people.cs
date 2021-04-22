@@ -77,10 +77,12 @@ public class people : MonoBehaviour
         }
     }
 
-    IEnumerator Timer() 
+    IEnumerator Timer()//获取时间倍率并赋值（问题：activity为false时出错，且只在开始执行，不会更新） 
     {
+        Parameter parameter = GameObject.Find("Canvas/Parameter").GetComponent<Parameter>();
+        float timescale = parameter.TimeScale+0.0f;
         while (true) {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(1.0f/timescale);
             //Debug.Log(string.Format("Timer2 is up !!! time=${0}", Time.time%24));
         }
     }

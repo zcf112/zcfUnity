@@ -8,16 +8,19 @@ using UnityEngine.UI;
 public class time : MonoBehaviour
 {
     public Button TimeManager;
-    public Text TextTime;
+    public InputField InputTime;
     private float timer = 0f;
     void Start()
     {
         timer = Time.realtimeSinceStartup;
+        InputTime.text = "1";
         TimeManager.onClick.AddListener(ChangeTime);
     }
 
     void ChangeTime()//修改时间倍率
     {
-        Time.timeScale = int.Parse(TextTime.text);
+        Time.timeScale = int.Parse(InputTime.text);
+        Parameter parameter = GameObject.Find("Canvas/Parameter").GetComponent<Parameter>();
+        parameter.TimeScale = int.Parse(InputTime.text);
     }
 }
