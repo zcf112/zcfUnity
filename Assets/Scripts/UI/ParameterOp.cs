@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ParameterOp : MonoBehaviour
+public class ParameterOp : MonoBehaviour//用来修改各个参数
 {
     public InputField Rate,Radius,WoekRate,RateLoc1,RateLoc2,RateLoc3,IncubationPeriod,LsolationRate,Bed;
     public Button ButtonYes;//确定按钮

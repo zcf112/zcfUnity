@@ -132,6 +132,7 @@ MonoBehaviour:
   Dest1: {fileID: 0}
   Dest2: {fileID: 0}
   Dest3: {fileID: 0}
+  hospital: {fileID: 0}
   time1: 0
   time2: 0
   rate1: 0
@@ -143,7 +144,20 @@ MonoBehaviour:
   happy3: 0
   happy4: 0
   isInfected: 0
+  isInfecting: 0
+  isDead: 0
+  inHospital: 0
+  TimeIncubation: 9999
+  TimeDead: 9999
+  TimeTreatment: 0
+  TimeAntibody: 0
+  timeUse: 0
   peo: {fileID: 6187747821584144700}
+  parameter: {fileID: 0}
+  txtNumInfecting: {fileID: 0}
+  txtNumInfected: {fileID: 0}
+  txtNumBed: {fileID: 0}
+  txtNumDead: {fileID: 0}
 --- !u!195 &6187747821584144699
 NavMeshAgent:
   m_ObjectHideFlags: 0

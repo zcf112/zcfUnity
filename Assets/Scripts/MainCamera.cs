@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 //生成房子（子对象）
 
 public class MainCamera : MonoBehaviour
@@ -38,7 +39,7 @@ public class MainCamera : MonoBehaviour
             peo.Dest1 = GameObject.Find("Homes/" + reader.GetString(3) + "/HTrigger");
             peo.Dest2 = GameObject.Find("Homes/" + reader.GetString(4) + "/HTrigger");
             peo.Dest3 = GameObject.Find("Homes/" + reader.GetString(5) + "/HTrigger");
-            peo.isInfected = reader.GetInt32(6);
+            peo.isInfecting = reader.GetInt32(6);
             peo.time1 = reader.GetFloat(7);
             peo.time2 = reader.GetFloat(8);
             peo.rate1 = reader.GetFloat(9);
@@ -48,6 +49,13 @@ public class MainCamera : MonoBehaviour
             peo.happy2 = reader.GetInt32(13);
             peo.happy3 = reader.GetInt32(14);
             peo.happy4 = reader.GetInt32(15);
+
+            peo.hospital = GameObject.Find("Homes/Hospital/HTrigger");//医院地址
+            peo.parameter = GameObject.Find("Canvas/Parameter").GetComponent<Parameter>();//参数对象
+            peo.txtNumInfecting = GameObject.Find("Canvas/TextSet/numInfecting").GetComponent<Text>();//感染人数
+            peo.txtNumInfected = GameObject.Find("Canvas/TextSet/numInfected").GetComponent<Text>();//发病人数
+            peo.txtNumBed = GameObject.Find("Canvas/TextSet/numBed").GetComponent<Text>();//剩余床位数
+            peo.txtNumDead = GameObject.Find("Canvas/TextSet/numDead").GetComponent<Text>();//死亡人数
         }
 
         navMeshSurface.BuildNavMesh();//每次添加后，重新烘焙
