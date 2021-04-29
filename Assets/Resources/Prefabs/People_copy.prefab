@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 6187747821584144702}
   - component: {fileID: 6187747821584144703}
   - component: {fileID: 6187747821584144693}
-  - component: {fileID: 6187747821584144698}
+  - component: {fileID: 1740082845172551568}
   - component: {fileID: 6187747821584144699}
   - component: {fileID: 4339785657005974918}
   m_Layer: 0
-  m_Name: People
+  m_Name: People_copy
   m_TagString: peopletag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6187747821584144698
+--- !u!114 &1740082845172551568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6187747821584144700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82fdf25d894fb9347a6fa9b97116f7f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b37c3dc794b15f408cb3da50891ebe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   home: {fileID: 0}

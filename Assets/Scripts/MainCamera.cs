@@ -16,10 +16,15 @@ public class MainCamera : MonoBehaviour
         while (reader.Read())
         {
             GameObject h_Clone = (GameObject)Resources.Load("Prefabs/House");//载入预制体
+            GameObject h_Clone_copy = (GameObject)Resources.Load("Prefabs/House");//
             h_Clone = Instantiate(h_Clone, new Vector3(reader.GetFloat(1), reader.GetFloat(2), reader.GetFloat(3)), Quaternion.Euler(reader.GetFloat(4), reader.GetFloat(5), reader.GetFloat(6)), GameObject.Find("Homes").transform);
+            h_Clone_copy = Instantiate(h_Clone_copy, new Vector3(reader.GetFloat(1), reader.GetFloat(2)-200, reader.GetFloat(3)), Quaternion.Euler(reader.GetFloat(4), reader.GetFloat(5), reader.GetFloat(6)), GameObject.Find("Homes_copy").transform);//
             h_Clone.name = reader.GetString(0);//改名
+            h_Clone_copy.name = reader.GetString(0)+ "_copy";//
             TextMesh textMesh = (TextMesh)GameObject.Find("Homes/" + reader.GetString(0) + "/HouseName").transform.GetComponent(typeof(TextMesh));//设置房子text值
+            //TextMesh textMesh_copy = (TextMesh)GameObject.Find("Homes_copy/" + reader.GetString(0) + "_copy/HouseName").transform.GetComponent(typeof(TextMesh));//加了会因为透视杂乱无章
             textMesh.text = reader.GetString(0);
+            //textMesh_copy.text = reader.GetString(0);//
         }//实例化房子
         reader.Close();
         
@@ -29,9 +34,13 @@ public class MainCamera : MonoBehaviour
         while (reader.Read())
         {
             GameObject s_Clone = (GameObject)Resources.Load("Prefabs/People");
+            GameObject s_Clone_copy = (GameObject)Resources.Load("Prefabs/People_copy");//
             s_Clone = Instantiate(s_Clone, new Vector3(0, 2, 0), Quaternion.Euler(0.0f, 0.0f, 0.0f), GameObject.Find("Peoples").transform); //二合一
+            s_Clone_copy = Instantiate(s_Clone_copy, new Vector3(0, -198, 0), Quaternion.Euler(0.0f, 0.0f, 0.0f), GameObject.Find("Peoples_copy").transform); //
             s_Clone.name = reader.GetString(0);//改名
+            s_Clone_copy.name = reader.GetString(0)+"_copy";//
             people peo = s_Clone.GetComponent<people>();
+            people_copy peo_copy = s_Clone_copy.GetComponent<people_copy>();
             //Debug.Log(reader.GetString(0) + reader.GetString(1) + reader.GetString(2) + reader.GetString(3) + reader.GetString(4) + reader.GetString(5) + reader.GetString(6) + 
             //reader.GetString(7) + reader.GetString(8) + reader.GetString(9) + reader.GetString(10) + reader.GetString(11) + reader.GetString(12) + reader.GetString(13) + reader.GetString(14));
             peo.home = GameObject.Find("Homes/" + reader.GetString(1) + "/HTrigger");
@@ -50,12 +59,35 @@ public class MainCamera : MonoBehaviour
             peo.happy3 = reader.GetInt32(14);
             peo.happy4 = reader.GetInt32(15);
 
+            peo_copy.home = GameObject.Find("Homes_copy/" + reader.GetString(1) + "_copy/HTrigger");
+            peo_copy.company = GameObject.Find("Homes_copy/" + reader.GetString(2) + "_copy/HTrigger");
+            peo_copy.Dest1 = GameObject.Find("Homes_copy/" + reader.GetString(3) + "_copy/HTrigger");
+            peo_copy.Dest2 = GameObject.Find("Homes_copy/" + reader.GetString(4) + "_copy/HTrigger");
+            peo_copy.Dest3 = GameObject.Find("Homes_copy/" + reader.GetString(5) + "_copy/HTrigger");
+            peo_copy.isInfecting = reader.GetInt32(6);
+            peo_copy.time1 = reader.GetFloat(7);
+            peo_copy.time2 = reader.GetFloat(8);
+            peo_copy.rate1 = reader.GetFloat(9);
+            peo_copy.rate2 = reader.GetFloat(10);
+            peo_copy.rate3 = reader.GetFloat(11);
+            peo_copy.happy1 = reader.GetInt32(12);
+            peo_copy.happy2 = reader.GetInt32(13);
+            peo_copy.happy3 = reader.GetInt32(14);
+            peo_copy.happy4 = reader.GetInt32(15);
+
             peo.hospital = GameObject.Find("Homes/Hospital/HTrigger");//医院地址
             peo.parameter = GameObject.Find("Canvas/Parameter").GetComponent<Parameter>();//参数对象
             peo.txtNumInfecting = GameObject.Find("Canvas/TextSet/numInfecting").GetComponent<Text>();//感染人数
             peo.txtNumInfected = GameObject.Find("Canvas/TextSet/numInfected").GetComponent<Text>();//发病人数
             peo.txtNumBed = GameObject.Find("Canvas/TextSet/numBed").GetComponent<Text>();//剩余床位数
             peo.txtNumDead = GameObject.Find("Canvas/TextSet/numDead").GetComponent<Text>();//死亡人数
+
+            peo_copy.hospital = GameObject.Find("Homes_copy/Hospital/HTrigger");//医院地址
+            peo_copy.parameter = GameObject.Find("Canvas_copy/Parameter_copy").GetComponent<Parameter>();//参数对象
+            peo_copy.txtNumInfecting = GameObject.Find("Canvas_copy/TextSet_copy/numInfecting").GetComponent<Text>();//感染人数
+            peo_copy.txtNumInfected = GameObject.Find("Canvas_copy/TextSet_copy/numInfected").GetComponent<Text>();//发病人数
+            peo_copy.txtNumBed = GameObject.Find("Canvas_copy/TextSet_copy/numBed").GetComponent<Text>();//剩余床位数
+            peo_copy.txtNumDead = GameObject.Find("Canvas_copy/TextSet_copy/numDead").GetComponent<Text>();//死亡人数
         }
 
         navMeshSurface.BuildNavMesh();//每次添加后，重新烘焙

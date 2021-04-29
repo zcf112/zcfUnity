@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 
-public class people : MonoBehaviour
+public class people_copy : MonoBehaviour
 {
     public GameObject home, company,Dest1,Dest2,Dest3;//寻路到目标物体
     public GameObject hospital;//医院地址
