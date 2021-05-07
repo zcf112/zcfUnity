@@ -6,9 +6,10 @@ using UnityEngine.AI;
 
 public class people_copy : MonoBehaviour
 {
-    public GameObject home, company,Dest1,Dest2,Dest3;//寻路到目标物体
+    public GameObject home, canteen, company, Dest1, Dest2, Dest3;//寻路到目标物体
     public GameObject hospital;//医院地址
-    public float time1, time2, rate1, rate2, rate3,value, happy1, happy2, happy3, happy4;//时间，概率，工作价值，幸福度
+    public int timeHome, timeBreakfast, timeLunch, timeDinner, timeWork1, timeWork2, time1, time2, time3, rate1, rate2, rate3;
+    //public float time1, time2, rate1, rate2, rate3,value, happy1, happy2, happy3, happy4;//时间，概率，工作价值，幸福度
 
     private NavMeshAgent agent;//导航
     public System.Random rd = new System.Random();
