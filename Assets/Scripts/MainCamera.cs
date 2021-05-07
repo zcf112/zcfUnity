@@ -68,18 +68,18 @@ public class MainCamera : MonoBehaviour
             //peo.happy3 = reader.GetInt32(14);
             //peo.happy4 = reader.GetInt32(15);
 
-            peo_copy.home = GameObject.Find("Homes_copy/" + reader.GetString(1) + "/HTrigger");
+            peo_copy.home = GameObject.Find("Homes_copy/" + reader.GetString(1) + "_copy/HTrigger");
             peo_copy.timeHome = reader.GetInt32(2);
-            peo_copy.canteen = GameObject.Find("Homes_copy/" + reader.GetString(3) + "/HTrigger");
+            peo_copy.canteen = GameObject.Find("Homes_copy/" + reader.GetString(3) + "_copy/HTrigger");
             peo_copy.timeBreakfast = reader.GetInt32(4);
             peo_copy.timeLunch = reader.GetInt32(5);
             peo_copy.timeDinner = reader.GetInt32(6);
-            peo_copy.company = GameObject.Find("Homes_copy/" + reader.GetString(7) + "/HTrigger");
+            peo_copy.company = GameObject.Find("Homes_copy/" + reader.GetString(7) + "_copy/HTrigger");
             peo_copy.timeWork1 = reader.GetInt32(8);
             peo_copy.timeWork2 = reader.GetInt32(9);
-            peo_copy.Dest1 = GameObject.Find("Homes_copy/" + reader.GetString(10) + "/HTrigger");
-            peo_copy.Dest2 = GameObject.Find("Homes_copy/" + reader.GetString(11) + "/HTrigger");
-            peo_copy.Dest3 = GameObject.Find("Homes_copy/" + reader.GetString(12) + "/HTrigger");
+            peo_copy.Dest1 = GameObject.Find("Homes_copy/" + reader.GetString(10) + "_copy/HTrigger");
+            peo_copy.Dest2 = GameObject.Find("Homes_copy/" + reader.GetString(11) + "_copy/HTrigger");
+            peo_copy.Dest3 = GameObject.Find("Homes_copy/" + reader.GetString(12) + "_copy/HTrigger");
             peo_copy.time1 = reader.GetInt32(13);
             peo_copy.time2 = reader.GetInt32(14);
             peo_copy.time3 = reader.GetInt32(15);
