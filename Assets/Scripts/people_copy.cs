@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using Random = System.Random;
 
 public class people_copy : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class people_copy : MonoBehaviour
     //public float time1, time2, rate1, rate2, rate3,value, happy1, happy2, happy3, happy4;//时间，概率，工作价值，幸福度
 
     private NavMeshAgent agent;//导航
-    public System.Random rd = new System.Random();
+    public Random rd = new Random(Guid.NewGuid().GetHashCode());
 
     public int isInfected = 0;//发病者
     public int isInfecting=0;//感染者
@@ -32,7 +33,6 @@ public class people_copy : MonoBehaviour
     public Text txtNumInfected;//发病人数
     public Text txtNumBed;//剩余床位数
     public Text txtNumDead;//死亡人数
-    //public  这是什么？？？ 
 
     // 寻路
     void Start(){
@@ -139,8 +139,7 @@ public class people_copy : MonoBehaviour
 
     private void Activity()
     {
-        System.Random ran = new System.Random();
-        int RandKey = ran.Next(0, 24);
+        int RandKey = rd.Next(0, 24);
         //Debug.Log(Time.time);//显示时间
         if (Time.time % 24 == time1)
         {
@@ -153,15 +152,15 @@ public class people_copy : MonoBehaviour
 
         //if ((Time.time % 24 < time1) || (Time.time % 24 > time2))//上班时间外可以出去玩？晚班呢？
         //{
-            if (ran.Next(0, 100000) < rate1)
+            if (rd.Next(0, 100000) < rate1)
             {
                 agent.SetDestination(Dest1.transform.position);
             }
-            if (ran.Next(0, 100000) < rate2)
+            if (rd.Next(0, 100000) < rate2)
             {
                 agent.SetDestination(Dest2.transform.position);
             }
-            if (ran.Next(0, 100000) < rate3)
+            if (rd.Next(0, 100000) < rate3)
             {
                 agent.SetDestination(Dest3.transform.position);
             }

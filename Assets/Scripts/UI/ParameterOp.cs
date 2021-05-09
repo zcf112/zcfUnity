@@ -9,7 +9,7 @@ public class ParameterOp : MonoBehaviour//用来修改各个参数
     void Start()
     {
         parameter = GameObject.Find("Canvas/Parameter").GetComponent<Parameter>();
-        Debug.Log(parameter);
+        //Debug.Log(parameter);
         ButtonYes.onClick.AddListener(ChangeParameter);
         Rate.text = parameter.Rate + "";
         Radius.text = parameter.Radius + "";
