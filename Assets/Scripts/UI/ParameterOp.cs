@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ParameterOp : MonoBehaviour//用来修改各个参数
 {
-    public InputField Rate,Radius,WoekRate,RateLoc1,RateLoc2,RateLoc3,IncubationPeriod, TimeTreatment, Bed, TimeDead,TimeAntibody ;
+    public InputField Rate,Radius,WoekRate,RateLoc1,RateLoc2,RateLoc3, TimeTreatment, Bed, TimeDead,TimeAntibody , RateInHouse;
     public Button ButtonYes;//确定按钮
     public Parameter parameter;
     void Start()
@@ -17,11 +17,11 @@ public class ParameterOp : MonoBehaviour//用来修改各个参数
         RateLoc1.text = parameter.RateLoc1 + "";
         RateLoc2.text = parameter.RateLoc2 + "";
         RateLoc3.text = parameter.RateLoc3 + "";
-        IncubationPeriod.text = parameter.IncubationPeriod + "";
         TimeTreatment.text = parameter.TimeTreatment + "";
         Bed.text = parameter.Bed + "";
         TimeDead.text = parameter.TimeDead + "";
-        TimeAntibody.text = parameter.TimeAntibody + ""; 
+        TimeAntibody.text = parameter.TimeAntibody + "";
+        RateInHouse.text = parameter.RateInHouse + "";
     }
 
     private void ChangeParameter()
@@ -32,11 +32,11 @@ public class ParameterOp : MonoBehaviour//用来修改各个参数
         parameter.RateLoc1 = int.Parse(RateLoc1.text);
         parameter.RateLoc2 = int.Parse(RateLoc2.text);
         parameter.RateLoc3 = int.Parse(RateLoc3.text);
-        parameter.IncubationPeriod = int.Parse(IncubationPeriod.text);
         parameter.TimeTreatment = int.Parse(TimeTreatment.text);
         parameter.Bed = int.Parse(Bed.text);
         parameter.TimeDead = int.Parse(TimeDead.text);
         parameter.TimeAntibody = int.Parse(TimeAntibody.text);
+        parameter.RateInHouse = int.Parse(RateInHouse.text);
 
         Text txt = GameObject.Find("Canvas/TextSet/numBed").GetComponent<Text>();
         txt.text = Bed.text;

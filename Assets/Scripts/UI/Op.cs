@@ -109,7 +109,7 @@ public class Op : MonoBehaviour
             if (rd < Convert.ToInt32(inputFieldInfectingRate.text)) infected = 1;
             else infected = 0;
             mysqlManager = new MysqlManager();
-            string str="'manyAdd','"+ SelectedOption + "','" + Home_ + "','" + timeHome + "','" + canteen_ + "','" + timeBreakfast + "','" + timeLunch + "','" + timeDinner + "','" + company_ + "','" + timeWork1 + "','" + timeWork2 + "','" + loc1_ + "','" + loc2_ + "','" + loc3_ + "','" + time1 + "','" + time2 + "','" + time3 + "','" + rate1 + "','" + rate2 + "','" + rate3 + "','" + infected +"'";
+            string str="'" + SelectedOption+  "','" + SelectedOption + "','" + Home_ + "','" + timeHome + "','" + canteen_ + "','" + timeBreakfast + "','" + timeLunch + "','" + timeDinner + "','" + company_ + "','" + timeWork1 + "','" + timeWork2 + "','" + loc1_ + "','" + loc2_ + "','" + loc3_ + "','" + time1 + "','" + time2 + "','" + time3 + "','" + rate1 + "','" + rate2 + "','" + rate3 + "','" + infected +"'";
             mysqlManager.InsertInto("People", "name,type,home,timeHome,canteen,timeBreakfast,timeLunch,timeDinner,company,timeWork1,timeWork2,loc1,loc2,loc3,time1,time2,time3,rate1,rate2,rate3,infected", str);
             mysqlManager.Close();
             

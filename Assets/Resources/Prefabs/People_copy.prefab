@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 6187747821584144700}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -128,21 +128,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   home: {fileID: 0}
+  canteen: {fileID: 0}
   company: {fileID: 0}
   Dest1: {fileID: 0}
   Dest2: {fileID: 0}
   Dest3: {fileID: 0}
   hospital: {fileID: 0}
+  timeHome: 0
+  timeBreakfast: 0
+  timeLunch: 0
+  timeDinner: 0
+  timeWork1: 0
+  timeWork2: 0
   time1: 0
   time2: 0
+  time3: 0
   rate1: 0
   rate2: 0
   rate3: 0
-  value: 0
-  happy1: 0
-  happy2: 0
-  happy3: 0
-  happy4: 0
+  inbusy: 0
+  timeNow: 0
+  parameter: {fileID: 0}
+  Rate: 0
+  Radius: 0
+  WoekRate: 0
+  RateLoc1: 0
+  RateLoc2: 0
+  RateLoc3: 0
+  IncubationPeriod: 0
+  LsolationRate: 0
+  p_IncubationPeriod: 0
+  p_TimeAntibody: 0
+  p_TimeDead: 0
+  p_TimeIncubation: 0
+  p_TimeTreatment: 0
   isInfected: 0
   isInfecting: 0
   isDead: 0
@@ -151,9 +170,7 @@ MonoBehaviour:
   TimeDead: 99999999
   TimeTreatment: 8000
   TimeAntibody: 0
-  timeUse: 0
   peo: {fileID: 6187747821584144700}
-  parameter: {fileID: 0}
   txtNumInfecting: {fileID: 0}
   txtNumInfected: {fileID: 0}
   txtNumBed: {fileID: 0}

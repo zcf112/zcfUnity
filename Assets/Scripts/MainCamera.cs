@@ -1,13 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Random = System.Random;
 //生成房子（子对象）
 
 public class MainCamera : MonoBehaviour
 {
     public NavMeshSurface navMeshSurface;//导航烘焙
     public MysqlManager mysqlManager = new MysqlManager();
+    public Random rand = new Random(Guid.NewGuid().GetHashCode());
 
     void Start()
     {
@@ -34,10 +37,11 @@ public class MainCamera : MonoBehaviour
         reader = mysqlManager.SelectFrom("select name,home,timeHome,canteen,timeBreakfast,timeLunch,timeDinner,company,timeWork1,timeWork2,loc1,loc2,loc3,time1,time2,time3,rate1,rate2,rate3,infected from People");
         while (reader.Read())
         {
+            int raX = rand.Next(-150, 150), raY = rand.Next(-150, 150);
             GameObject s_Clone = (GameObject)Resources.Load("Prefabs/People");
             GameObject s_Clone_copy = (GameObject)Resources.Load("Prefabs/People_copy");//
-            s_Clone = Instantiate(s_Clone, new Vector3(0, 2, 0), Quaternion.Euler(0.0f, 0.0f, 0.0f), GameObject.Find("Peoples").transform); //二合一
-            s_Clone_copy = Instantiate(s_Clone_copy, new Vector3(0, -198, 0), Quaternion.Euler(0.0f, 0.0f, 0.0f), GameObject.Find("Peoples_copy").transform); //
+            s_Clone = Instantiate(s_Clone, new Vector3(raX, 2, raY), Quaternion.Euler(0.0f, 0.0f, 0.0f), GameObject.Find("Peoples").transform); //二合一
+            s_Clone_copy = Instantiate(s_Clone_copy, new Vector3(raX, -198, raY), Quaternion.Euler(0.0f, 0.0f, 0.0f), GameObject.Find("Peoples_copy").transform); //
             s_Clone.name = reader.GetString(0);//改名
             s_Clone_copy.name = reader.GetString(0)+"_copy";//
             people peo = s_Clone.GetComponent<people>();

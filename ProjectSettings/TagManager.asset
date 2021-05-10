@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - open
+  - peopletag
+  - HouseTag
   layers:
   - Default
   - TransparentFX
