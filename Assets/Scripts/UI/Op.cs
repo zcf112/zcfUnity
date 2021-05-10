@@ -7,7 +7,7 @@ using Random = System.Random;
 
 public class Op : MonoBehaviour
 {
-    //批量添加和删除的按钮脚本
+    //批量添加和删除角色的按钮脚本
     public MysqlManager mysqlManager;
     public Dropdown dDown;
     public InputField inputFieldNum;
@@ -94,14 +94,33 @@ public class Op : MonoBehaviour
         mysqlManager.Close();
 
         Random random = new Random(Guid.NewGuid().GetHashCode());//短时间内也不会重复的随机数，来自https://www.itdaan.com/blog/2017/06/22/aaad227616e68bb20296da02bbce451c.html
-        for (int i = 0; i < Convert.ToInt32(inputFieldNum.text); i++)
+
+        //为减少对数据库的读取次数，将地点提前保存在数组中
+        int count = 0;//记录某种建筑条数等
+        mysqlManager = new MysqlManager();
+        reader = mysqlManager.SelectFrom("select count(*) from HouseLoc");
+        while (reader.Read()) count = reader.GetInt32(0);//获取建筑的个数
+        reader.Close();
+
+        int i = 0;
+        string[,] arrayHouse  = new string[2,count];
+        reader = mysqlManager.SelectFrom("select type,House from HouseLoc");
+        while (reader.Read())
         {
-            string Home_ = change(Home);
-            string canteen_ = change(canteen);
-            string company_ = change(company);
-            string loc1_ = change(loc1);
-            string loc2_ = change(loc2);
-            string loc3_ = change(loc3);
+            arrayHouse[0, i] = reader.GetString(0);
+            arrayHouse[1, i] = reader.GetString(1);
+            i++;
+        }
+        reader.Close();
+
+        for (i = 0; i < Convert.ToInt32(inputFieldNum.text); i++)
+        {
+            string Home_ = change(Home , arrayHouse ,count);
+            string canteen_ = change(canteen, arrayHouse, count);
+            string company_ = change(company, arrayHouse, count);
+            string loc1_ = change(loc1, arrayHouse, count);
+            string loc2_ = change(loc2, arrayHouse, count);
+            string loc3_ = change(loc3, arrayHouse, count);
 
             //Debug.Log(random.Next(0, 100));
             //Debug.Log(inputFieldInfectingRate.text);
@@ -136,9 +155,14 @@ public class Op : MonoBehaviour
         mysqlManager.Close();
     }
 
-    private String change(String str)//将输入的建筑类型随机抽取一栋返回
+    private String change(String str , String[,] arrayStr,int count)//将输入的建筑类型随机抽取一栋返回
     {
-        int count = 0;//记录某种建筑条数等
+        int rd = rand.Next(0, count);
+        while (!arrayStr[0, rd].Equals(str))rd = rand.Next(0, count);
+        return arrayStr[1, rd];
+
+        //旧的需要读取数据库的方法
+        /*int count = 0;//记录某种建筑条数等
         
         mysqlManager = new MysqlManager();
 
@@ -164,6 +188,6 @@ public class Op : MonoBehaviour
         reader.Close();
         mysqlManager.Close();
 
-        return str;
+        return str;*/
     }
 }
