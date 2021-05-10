@@ -65,7 +65,7 @@ public class people : MonoBehaviour
         StartCoroutine(Timer());
     }
 
-    void Update()
+    void FixedUpdate()
     {//参数校对+传播流程
         if ((Rate != parameter.Rate) || (Radius != parameter.Radius) || (WoekRate != parameter.WoekRate) || (RateLoc1 != parameter.RateLoc1) || (RateLoc2 != parameter.RateLoc2) || (RateLoc3 != parameter.RateLoc3) || (RateInHouse != parameter.RateInHouse))
         {//参数校对
@@ -253,7 +253,11 @@ public class people : MonoBehaviour
 
     void OnTriggerEnter(Collider coll)//到房间里
     {
-        if (coll.gameObject.CompareTag("HouseTag") && isInHouse == 0) isInHouse = 1;
+        if (coll.gameObject.CompareTag("HouseTag") && isInHouse == 0)
+        {
+            //agent.SetDestination(this.transform.position);
+            isInHouse = 1;
+        }
     }
 
     void OnTriggerExit(Collider coll)//离开房间

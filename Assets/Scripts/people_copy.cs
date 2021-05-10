@@ -87,11 +87,11 @@ public class people_copy : MonoBehaviour
         StartCoroutine(Timer());
     }
 
-    void Update()
+    void FixedUpdate()
     {//传播流程
-        if (timeNow != Time.time % 24)//整点inbusy减一
+        if (timeNow != Time.time % 48)//整点inbusy减一
         {
-            timeNow = (int)Time.time % 24;
+            timeNow = (int)Time.time % 48;
             if (inbusy > 0) inbusy--;
             Debug.Log(timeNow);
         }
@@ -183,42 +183,42 @@ public class people_copy : MonoBehaviour
     {
 
         //Debug.Log(Time.time);//显示时间
-        if ((Time.time % 24 == timeBreakfast) || (Time.time % 24 == timeLunch)|| (Time.time % 24 == timeDinner))//饭点吃饭一个小时
+        if ((Time.time % 48 == timeBreakfast*2) || (Time.time % 48 == timeLunch*2)|| (Time.time % 48 == timeDinner*2))//饭点吃饭一个小时
         {
             agent.SetDestination(canteen.transform.position);
             inbusy = 1;
         }
-        if (Time.time % 24 == timeHome)//回住处
+        if (Time.time % 48 == timeHome*2)//回住处
         {
             agent.SetDestination(home.transform.position);
-            inbusy = 24 - timeHome + timeBreakfast;
+            inbusy = (24 - timeHome + timeBreakfast)*2;
         }
-        if (Time.time % 24 == timeBreakfast+1)//早上去工作
+        if (Time.time % 48 == timeBreakfast*2+2)//早上去工作
         {
             if (rd.Next(0, 100) <= WoekRate) agent.SetDestination(company.transform.position);//概率出门可以改这里
-            inbusy = timeWork1;
+            inbusy = timeWork1*2;
         }
-        if (Time.time % 24 == timeLunch+1)//下午去工作
+        if (Time.time % 48 == timeLunch*2+2)//下午去工作
         {
             if (rd.Next(0, 100) <= WoekRate) agent.SetDestination(company.transform.position);
-            inbusy = timeWork2;
+            inbusy = timeWork2*2;
         }
 
         if (inbusy == 0)
         {
             if ((rd.Next(0, 100000) < rate1)&&(rd.Next(0,100)<=RateLoc1))
             {
-                inbusy = time1;
+                inbusy = time1*2;
                 agent.SetDestination(Dest1.transform.position);
             }
             else if ((rd.Next(0, 100000) < rate2) && (rd.Next(0, 100) <= RateLoc2))
             {
-                inbusy = time2;
+                inbusy = time2*2;
                 agent.SetDestination(Dest2.transform.position);
             }
             else if ((rd.Next(0, 100000) < rate2) && (rd.Next(0, 100) <= RateLoc2))
             {
-                inbusy = time3;
+                inbusy = time3*2;
                 agent.SetDestination(Dest3.transform.position);
             }
         }
@@ -264,7 +264,11 @@ public class people_copy : MonoBehaviour
 
     void OnTriggerEnter(Collider coll)//到房间里
     {
-        if (coll.gameObject.CompareTag("HouseTag") && isInHouse == 0) isInHouse = 1;
+        if (coll.gameObject.CompareTag("HouseTag") && isInHouse == 0)
+        {
+            //agent.SetDestination(this.transform.position);
+            isInHouse = 1;
+        }  
     }
 
     void OnTriggerExit(Collider coll)//离开房间

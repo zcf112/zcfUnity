@@ -29,8 +29,8 @@ public class Parameter : MonoBehaviour
         TimeDead = 7000;
         RateInHouse = 2;
         Bed = 5;
-        TimeAntibody = 2000;
-        TimeTreatment = 4000;
+        TimeAntibody = 20;
+        TimeTreatment = 40;
         TimeScale = 1;
 
         Text numBed = GameObject.Find("Canvas/TextSet/numBed").GetComponent<Text>();
