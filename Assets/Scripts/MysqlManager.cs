@@ -4,10 +4,10 @@ using MySql.Data.MySqlClient;
 
 public class MysqlManager
 {
-    //string ip = "47.102.197.60";//ip地址
-    string ip = "localhost";//ip地址
-    //string username = "zdata";//登录ID
-    string username = "root";//登录ID
+    string ip = "47.102.197.60";//ip地址
+    //string ip = "localhost";//ip地址
+    string username = "zdata";//登录ID
+    //string username = "root";//登录ID
     string password = "112112@Zcf";//登录密码
     string dbName = "zdata";//数据库名称
 
