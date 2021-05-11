@@ -2014,7 +2014,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u53D1\u75C5\u540E\u81F4\u6B7B\u65F6\u95F4\uFF1A"
+  m_Text: "\u53D1\u75C5\u81F4\u6B7B\u65F6\u95F4/h\uFF1A"
 --- !u!222 &72192695
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7280,7 +7280,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6F5C\u4F0F\u671F\uFF08\u5E27\uFF09\uFF1A"
+  m_Text: "\u6F5C\u4F0F\u671F/h\uFF1A"
 --- !u!222 &265988001
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12012,7 +12012,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F20\u64AD\u534A\u5F84\uFF08m\uFF09\uFF1A"
+  m_Text: "\u4F20\u64AD\u534A\u5F84\uFF08/100\uFF09\uFF1A"
 --- !u!222 &525191841
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12500,7 +12500,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2000
+  m_Text: 20
 --- !u!222 &559735584
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15661,7 +15661,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 1
 --- !u!222 &675829734
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16376,7 +16376,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 7000
+  m_Text: 70
 --- !u!222 &700115796
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18339,7 +18339,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6CBB\u6108\u65F6\u95F4\uFF1A"
+  m_Text: "\u6CBB\u6108\u65F6\u95F4/h\uFF1A"
 --- !u!222 &776931678
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30950,7 +30950,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3000
+  m_Text: 30
 --- !u!222 &1397433142
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -31187,7 +31187,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u75C5\u6108\u6297\u611F\u67D3\u65F6\u95F4\uFF1A"
+  m_Text: "\u6297\u611F\u67D3\u65F6\u95F4/h\uFF1A"
 --- !u!222 &1404107059
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33051,6 +33051,7 @@ MonoBehaviour:
   TimeDead: {fileID: 950243144}
   TimeAntibody: {fileID: 697230131}
   RateInHouse: {fileID: 1510005974}
+  IncubationPeriod: {fileID: 1205916137}
   ButtonYes: {fileID: 1507904265}
   parameter: {fileID: 973732126}
 --- !u!1 &1510005972
@@ -40410,7 +40411,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4000
+  m_Text: 40
 --- !u!222 &1863443738
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40610,7 +40611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1883684651
 RectTransform:
   m_ObjectHideFlags: 0

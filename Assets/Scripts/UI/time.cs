@@ -2,17 +2,17 @@
 using UnityEngine.UI;
 
 /*
- * 时间控制，数字键012控制时间倍率，但只会控制事件相关函数如Update和 LateUpdate，无法控制帧函数（fixupdate）等
+ * 时间控制，控制时间倍率，但只会控制事件相关函数如Update和 LateUpdate，无法控制帧函数（fixupdate）等
  * 
  */
 public class time : MonoBehaviour
 {
     public Button TimeManager;
     public InputField InputTime;
-    private float timer = 0f;
+    //private float timer = 0f;
     void Start()
     {
-        timer = Time.realtimeSinceStartup;
+        //timer = Time.realtimeSinceStartup;
         InputTime.text = "1";
         TimeManager.onClick.AddListener(ChangeTime);
     }
