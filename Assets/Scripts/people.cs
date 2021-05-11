@@ -13,19 +13,21 @@ public class people : MonoBehaviour
     public int inbusy = 0;//正在忙碌时间
     public int isInHouse;//判断是否在房子内
     public int timeNow = 0;//判断时间是否过去一小时了（time是小数，不好判断是否整点，比较time整数部分和timeNow是否相同判断是不是过了一个小时）
+
+    public int speedRate = 2;//加速比，一小时相当于几秒
     //public float time1, time2, rate1, rate2, rate3,value, happy1, happy2, happy3, happy4;//时间，概率，工作价值，幸福度
 
     private NavMeshAgent agent;//导航
     public Random rd = new Random(Guid.NewGuid().GetHashCode());
     public Parameter parameter;
 
-    public int Rate = 100;//传播概率
-    public int Radius = 100;//传播半径
+    public float Rate = 10;//传播概率%/h
+    public float Radius = 1;//传播半径/米
     public int WoekRate = 100;//工作比例
     public int RateLoc1 = 100;//还会去地点一玩的比例
     public int RateLoc2 = 100;//还会去地点一玩的比例
     public int RateLoc3 = 100;//还会去地点一玩的比例
-    public int RateInHouse = 2;//室内发病倍率
+    public float RateInHouse = 2;//室内发病倍率
 
     public int isInfected = 0;//发病者
     public int isInfecting = 0;//感染者
@@ -48,7 +50,7 @@ public class people : MonoBehaviour
     // 寻路
     void Start()
     {
-        parameter = GameObject.Find("Canvas/Parameter").GetComponent<Parameter>();
+        parameter = GameObject.Find("Parameter").GetComponent<Parameter>();
         peo.GetComponent<Renderer>().material.color = Color.white;//初始未感染者设为白色
 
         agent = gameObject.GetComponent<NavMeshAgent>();
@@ -68,7 +70,7 @@ public class people : MonoBehaviour
     void FixedUpdate()
     {//参数校对+传播流程
         if ((Rate != parameter.Rate) || (Radius != parameter.Radius) || (WoekRate != parameter.WoekRate) || (RateLoc1 != parameter.RateLoc1) || (RateLoc2 != parameter.RateLoc2) || (RateLoc3 != parameter.RateLoc3) || (RateInHouse != parameter.RateInHouse))
-        {//参数校对
+        {//参数校对//可以优化
             Rate = parameter.Rate;//传播概率
             Radius = parameter.Radius;//传播半径
             WoekRate = parameter.WoekRate;//工作比例
@@ -78,9 +80,9 @@ public class people : MonoBehaviour
             RateInHouse = parameter.RateInHouse;//室内发病倍率
         }
 
-        if (timeNow != Time.time % 24)//整点inbusy减一
+        if (timeNow != Time.time % (24 * speedRate))//整点inbusy减一
         {
-            timeNow = (int)Time.time % 24;
+            timeNow = (int)Time.time % (24* speedRate);
             if (inbusy > 0) inbusy--;
             Debug.Log(timeNow);
         }
@@ -114,8 +116,8 @@ public class people : MonoBehaviour
                 else//减少治愈时间和死亡时间
                 {
                     Debug.Log("减少治愈时间和死亡时间");
-                    TimeDead--;
-                    TimeTreatment--;
+                    TimeDead-=speedRate;
+                    TimeTreatment -= speedRate;
                 }
             }
             else if (isInfected == 1 && Int32.Parse(txtNumBed.text) > 0)//发病且有空余床位且不在医院->床位减一,前往医院，在医院flag变一
@@ -127,13 +129,14 @@ public class people : MonoBehaviour
             }
             else if (isInfected == 1)//发病且没空余床位,死亡时间减少
             {
-                TimeDead--;
+                TimeDead -= speedRate;
                 //Debug.Log(TimeDead);
                 if (TimeDead == 0)//死亡，停止运动
                 {
                     isDead = 1;
                     peo.GetComponent<Renderer>().material.color = Color.black;
                     txtNumDead.text = (Int32.Parse(txtNumDead.text) + 1) + "";
+                    txtNumInfecting.text = (Int32.Parse(txtNumInfecting.text) - 1) + "";
                     txtNumInfected.text = (Int32.Parse(txtNumInfected.text) - 1) + "";
                     agent.SetDestination(peo.transform.position);
                 }
@@ -142,7 +145,7 @@ public class people : MonoBehaviour
             else if (isInfecting == 1)//未发病时,发病天数减少，少到零时潜伏为零，已感染为一，获取死亡时间，变红色
             {
                 Debug.Log("未发病时");
-                TimeIncubation--;
+                TimeIncubation -= speedRate;
                 if (TimeIncubation == 0)
                 {
                     isInfecting = 0;
@@ -159,7 +162,7 @@ public class people : MonoBehaviour
             {
                 Debug.Log("没病");
                 Activity();//定时定点活动
-                if (TimeAntibody > 0) TimeAntibody--;
+                if (TimeAntibody > 0) TimeAntibody -= speedRate;
             }
         }
         else//死亡，停止活动
@@ -171,42 +174,42 @@ public class people : MonoBehaviour
     private void Activity()
     {
         //Debug.Log(Time.time);//显示时间
-        if ((Time.time % 24 == timeBreakfast) || (Time.time % 24 == timeLunch) || (Time.time % 24 == timeDinner))//饭点吃饭一个小时
+        if ((Time.time % (24 *speedRate) == timeBreakfast * speedRate) || (Time.time % (24 * speedRate) == timeLunch * speedRate) || (Time.time % (24 * speedRate) == timeDinner * speedRate))//饭点吃饭一个小时
         {
             agent.SetDestination(canteen.transform.position);
-            inbusy = 1;
+            inbusy = 1 * speedRate;
         }
-        if (Time.time % 24 == timeHome)//回住处
+        if (Time.time % (24 * speedRate) == timeHome * speedRate)//回住处
         {
             agent.SetDestination(home.transform.position);
-            inbusy = 24 - timeHome + timeBreakfast;
+            inbusy = (24 - timeHome + timeBreakfast) * speedRate;
         }
-        if (Time.time % 24 == timeBreakfast + 1)//早上去工作
+        if (Time.time % (24 * speedRate) == (timeBreakfast + 1) * speedRate)//早上去工作
         {
             if (rd.Next(0, 100) <= WoekRate) agent.SetDestination(company.transform.position);//概率出门可以改这里
-            inbusy = timeWork1;
+            inbusy = timeWork1 * speedRate;
         }
-        if (Time.time % 24 == timeLunch + 1)//下午去工作
+        if (Time.time % (24 * speedRate) == (timeLunch + 1) * speedRate)//下午去工作
         {
             if (rd.Next(0, 100) <= WoekRate) agent.SetDestination(company.transform.position);
-            inbusy = timeWork2;
+            inbusy = timeWork2 * speedRate;
         }
 
         if (inbusy == 0)
         {
-            if ((rd.Next(0, 100000) < rate1) && (rd.Next(0, 100) <= RateLoc1))
+            if ((rd.Next(0, 100) < rate1) && (rd.Next(0, 100) <= RateLoc1))
             {
-                inbusy = time1;
+                inbusy = time1 * speedRate;
                 agent.SetDestination(Dest1.transform.position);
             }
-            else if ((rd.Next(0, 100000) < rate2) && (rd.Next(0, 100) <= RateLoc2))
+            else if ((rd.Next(0, 100) < rate2) && (rd.Next(0, 100) <= RateLoc2))
             {
-                inbusy = time2;
+                inbusy = time2 * speedRate;
                 agent.SetDestination(Dest2.transform.position);
             }
-            else if ((rd.Next(0, 100000) < rate2) && (rd.Next(0, 100) <= RateLoc2))
+            else if ((rd.Next(0, 100) < rate2) && (rd.Next(0, 100) <= RateLoc2))
             {
-                inbusy = time3;
+                inbusy = time3 * speedRate;
                 agent.SetDestination(Dest3.transform.position);
             }
         }
@@ -218,11 +221,11 @@ public class people : MonoBehaviour
         {
             if (peo.GetComponent<Renderer>().material.color == Color.white && TimeAntibody == 0)
             {
-                int realRate;
+                float realRate;
                 if (isInHouse == 1) realRate = Rate * RateInHouse;//房内乘房内感染倍率
                 else realRate = Rate;
 
-                if (rd.Next(0, 3000) <= (realRate / 100))//改颜色，改潜伏期，感染计数加一，感染flag变一
+                if (rd.Next(0, 10000) <= realRate * 100)//改颜色，改潜伏期，感染计数加一，感染flag变一
                 {
                     Debug.Log("感染");
                     isInfecting = 1;

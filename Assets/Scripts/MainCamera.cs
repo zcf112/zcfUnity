@@ -11,9 +11,16 @@ public class MainCamera : MonoBehaviour
     public NavMeshSurface navMeshSurface;//导航烘焙
     public MysqlManager mysqlManager = new MysqlManager();
     public Random rand = new Random(Guid.NewGuid().GetHashCode());
+    public Parameter parameter;
 
     void Start()
     {
+        parameter= GameObject.Find("Parameter").GetComponent<Parameter>();
+        Text numBed = GameObject.Find("Canvas/TextSet/numBed").GetComponent<Text>();
+        Text numBed_copy = GameObject.Find("Canvas_copy/TextSet_copy/numBed").GetComponent<Text>();//
+        numBed.text = parameter.Bed.ToString();//剩余床位数
+        numBed_copy.text = parameter.Bed.ToString();//
+
         //从数据库中载入房子
         MySqlDataReader reader = mysqlManager.SelectFrom("select House,type,lx,ly,lz,rx,ry,rz,sx,sy,sz from HouseLoc");
         while (reader.Read())
@@ -97,14 +104,14 @@ public class MainCamera : MonoBehaviour
             //peo.happy4 = reader.GetInt32(15);
 
             peo.hospital = GameObject.Find("Homes/Hospital/HTrigger");//医院地址
-            peo.parameter = GameObject.Find("Canvas/Parameter").GetComponent<Parameter>();//参数对象
+            peo.parameter = GameObject.Find("Parameter").GetComponent<Parameter>();//参数对象
             peo.txtNumInfecting = GameObject.Find("Canvas/TextSet/numInfecting").GetComponent<Text>();//感染人数
             peo.txtNumInfected = GameObject.Find("Canvas/TextSet/numInfected").GetComponent<Text>();//发病人数
             peo.txtNumBed = GameObject.Find("Canvas/TextSet/numBed").GetComponent<Text>();//剩余床位数
             peo.txtNumDead = GameObject.Find("Canvas/TextSet/numDead").GetComponent<Text>();//死亡人数
 
             peo_copy.hospital = GameObject.Find("Homes_copy/Hospital/HTrigger");//医院地址
-            peo_copy.parameter = GameObject.Find("Canvas_copy/Parameter_copy").GetComponent<Parameter>();//参数对象
+            peo_copy.parameter = GameObject.Find("Parameter").GetComponent<Parameter>();//参数对象
             peo_copy.txtNumInfecting = GameObject.Find("Canvas_copy/TextSet_copy/numInfecting").GetComponent<Text>();//感染人数
             peo_copy.txtNumInfected = GameObject.Find("Canvas_copy/TextSet_copy/numInfected").GetComponent<Text>();//发病人数
             peo_copy.txtNumBed = GameObject.Find("Canvas_copy/TextSet_copy/numBed").GetComponent<Text>();//剩余床位数

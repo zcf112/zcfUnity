@@ -20,7 +20,7 @@ public class time : MonoBehaviour
     void ChangeTime()//修改时间倍率
     {
         Time.timeScale = int.Parse(InputTime.text);
-        Parameter parameter = GameObject.Find("Canvas/Parameter").GetComponent<Parameter>();
+        Parameter parameter = GameObject.Find("Parameter").GetComponent<Parameter>();
         parameter.TimeScale = int.Parse(InputTime.text);
     }
 }
